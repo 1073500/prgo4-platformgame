@@ -5,11 +5,9 @@ import { Resources } from './resources.js'
 // export, zodat spongebob in de game komt
 export class Clovy extends Actor {
 
-    name
-    score
     player
 
-    constructor(name, x, y, player) {
+    constructor(player, x, y) {
         super({
             width: Resources.Clovy.width,
             height: Resources.Clovy.height,
@@ -17,18 +15,15 @@ export class Clovy extends Actor {
         })
 
         this.score = 0
-        console.log(`My name is ${name}`)
-        this.name = name
+        //console.log(`My name is ${name}`)
+        //this.name = name
         this.player = player
 
-
-        console.log("Ben er klaar voor!")
         this.graphics.use(Resources.Clovy.toSprite())
         this.pos = new Vector(x, y)
-        this.scale = new Vector(0.2, 0.2)
+        this.scale = new Vector(0.4, 0.4)
        
     }
-
 
     onPreUpdate(engine) {
         let xspeed = 0
@@ -58,8 +53,5 @@ export class Clovy extends Actor {
 
     }
 
-    onInitialize(engine) {
-        this.on('collisionstart', (event) => this.hitSomething(event))
-    }
 
 }

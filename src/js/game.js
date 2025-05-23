@@ -1,9 +1,9 @@
 import '../css/style.css'
 import { Actor, Engine, Vector, DisplayMode } from "excalibur"
 import { Resources, ResourceLoader } from './resources.js'
-import { UI } from './ui.js'
-import {BG} from './bg.js'
 import { Clovy } from './clovy.js'
+import {BG} from './bg.js'
+//import { UI } from './ui.js'
 import { Coin } from './coins.js'
 import { PM } from './pm.js'
 
@@ -23,17 +23,17 @@ export class Game extends Engine {
         console.log("start de game!")
         
         //achtergrond
-        let bg = new Actor()
+        let bg = new BG()
         this.add(bg)
 
         //ui
 
         //clovy
-        let clovy = new Actor()
+        let clovy = new Clovy("playerOne", 0, 0)
         this.add(clovy)
 
         //coins
-        let coin = new Actor()
+        let coin = new Coin()
         this.add(coin)
 
         //platform klein
@@ -41,7 +41,7 @@ export class Game extends Engine {
         this.add(platformS)
 
         //platform middel
-        let platformM = new Actor()
+        let platformM = new PM()
         this.add(platformM)
 
         //platform groot
