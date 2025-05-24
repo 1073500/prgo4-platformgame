@@ -1,11 +1,13 @@
 // alles wat je van excalibur nodig hebt moet je importeren
 import { Actor, Vector, Keys, CollisionType } from "excalibur"
 import { Resources } from './resources.js'
+import { Coin } from './coins.js'
 
 // export, zodat spongebob in de game komt
 export class Clovy extends Actor {
 
     player
+    score
 
     constructor(player, x, y) {
         super({
@@ -15,8 +17,6 @@ export class Clovy extends Actor {
         })
 
         this.score = 0
-        //console.log(`My name is ${name}`)
-        //this.name = name
         this.player = player
 
         this.graphics.use(Resources.Clovy.toSprite())
@@ -51,6 +51,22 @@ export class Clovy extends Actor {
     
         }
 
+    }
+
+    //coins verzamelen
+    onInitialize(engine) {
+        this.on('collisionstart', (event) => this.hitSomething(event))
+    }
+
+
+    hitSomething(event) {
+        if (event.other.owner instanceof Coin) {
+            // Je kan `instanceof` gebruiken om te zien waar je tegenaan botst.
+            console.log(`${Clovy} ving een muntje!`)
+            event.other.owner.kill()
+            this.score++
+            console.log(`${this.score}`)
+        }
     }
 
 
