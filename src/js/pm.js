@@ -6,10 +6,9 @@ export class PM extends Actor {
         super()
 
         this.graphics.use(Resources.PM.toSprite())
-        //platformM.pos = new Vector(400, 450 / 2)
+        this.pos = new Vector(1280/2, 570)
         this.scale = new Vector(0.5, 0.5)
-        this.anchor = new Vector(0, 0) //makkelijk afbeelding centeren
-
+        //this.anchor = new Vector(0., 0) //makkelijk afbeelding centeren
     }
 
 }

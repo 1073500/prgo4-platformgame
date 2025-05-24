@@ -21,7 +21,7 @@ export class Clovy extends Actor {
 
         this.graphics.use(Resources.Clovy.toSprite())
         this.pos = new Vector(x, y)
-        this.scale = new Vector(0.4, 0.4)
+        this.scale = new Vector(0.3, 0.3)
        
     }
 

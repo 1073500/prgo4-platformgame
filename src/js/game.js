@@ -32,6 +32,10 @@ export class Game extends Engine {
         let clovy = new Clovy("playerOne", 0, 0)
         this.add(clovy)
 
+        //bomb
+        let bomb = new Actor()
+        this.add(bomb)
+
         //coins
         let coin = new Coin()
         this.add(coin)
