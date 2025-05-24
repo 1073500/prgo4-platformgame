@@ -6,6 +6,7 @@ import {BG} from './bg.js'
 //import { UI } from './ui.js'
 import { Coin } from './coins.js'
 import { PM } from './pm.js'
+import { Bomb } from './bomb.js'
 
 export class Game extends Engine {
 
@@ -33,7 +34,7 @@ export class Game extends Engine {
         this.add(clovy)
 
         //bomb
-        let bomb = new Actor()
+        let bomb = new Bomb()
         this.add(bomb)
 
         //coins
