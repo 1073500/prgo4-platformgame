@@ -62,12 +62,13 @@ export class Clovy extends Actor {
     hitSomething(event) {
         if (event.other.owner instanceof Coin) {
             // Je kan `instanceof` gebruiken om te zien waar je tegenaan botst.
-            console.log(`${Clovy} ving een muntje!`)
             event.other.owner.kill()
             this.score++
             console.log(`${this.score}`)
+            this.scene.engine.ui.showScore(this.score)
         }
     }
+
 
 
 }

@@ -6,6 +6,7 @@ const Resources = {
     BG: new ImageSource('images/game-bg.png'),
     Coin: new ImageSource('images/coin.png'),
     PM: new ImageSource('images/balk-scaled.png'),
+    PS: new ImageSource ('images/balk-klein.png'),
     Bomb: new ImageSource('images/bomb.png'),
 }
 
