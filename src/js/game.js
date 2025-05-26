@@ -1,5 +1,5 @@
 import '../css/style.css'
-import { Actor, Engine, Vector, DisplayMode } from "excalibur"
+import { Actor, Engine, Vector, DisplayMode, SolverStrategy } from "excalibur"
 import { Resources, ResourceLoader } from './resources.js'
 import { Clovy } from './clovy.js'
 import { BG } from './bg.js'
@@ -18,8 +18,13 @@ ui
             width: 1280,
             height: 720,
             maxFps: 60,
-            displayMode: DisplayMode.FitScreen
+            displayMode: DisplayMode.FitScreen,
+            physics: {
+                solver: SolverStrategy.Realistic,
+                gravity: new Vector(0, 800),
+            }
         })
+        this.showDebug(true)
         this.start(ResourceLoader).then(() => this.startGame())
     }
 
@@ -35,7 +40,7 @@ ui
         this.add(this.ui)
 
         //clovy
-        let clovy = new Clovy("playerOne", 0, 0)
+        let clovy = new Clovy("playerOne", 100, 100)
         this.add(clovy)
 
         //bomb
@@ -43,10 +48,10 @@ ui
         this.add(bomb)
 
         //coins
-        //for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 5; i++) {
             let coin = new Coin()
             this.add(coin)
-       // }
+        }
 
         //platform klein
         let platformS = new PS()

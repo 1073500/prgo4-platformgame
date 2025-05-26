@@ -15,16 +15,23 @@ export class Bomb extends Actor {
         this.graphics.use(Resources.Bomb.toSprite())
         this.pos = new Vector(1280 / 2, 400)
         this.scale = new Vector(0.30, 0.30)
+        this.direction = 1
 
-
-        this.vel = new Vector(120, 0)
-        this.on('exitviewport', () => this.resetPosition())
-
-
+        this.vel = new Vector(120 * this.direction, 0)
 
     }
-    resetPosition() {
-        this.pos.x = 1280 / 2
+    onPostUpdate(engine) {
+        if(this.direction === 1 && this.pos.x > 1200) {
+            this.direction = -1
+            this.vel = new Vector(120 * this.direction, 0)
+
+        }
+
+        if(this.direction === -1 && this.pos.x < 100) {
+            this.direction = 1
+            this.vel = new Vector(120 * this.direction, 0)
+
+        }
     }
 
     // bom raakt Clovy
@@ -35,7 +42,8 @@ export class Bomb extends Actor {
 
     hitClovy(event) {
         if (event.other.owner instanceof Clovy) {
-            event.other.owner.kill()
+           // event.other.owner.kill()
+           event.other.owner.gameOver()
             console.log("De bom heeft Clovy geraakt :(")
         }
     }

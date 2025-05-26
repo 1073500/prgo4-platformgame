@@ -9,7 +9,7 @@ export class PS extends Actor {
         })
 
         this.graphics.use(Resources.PS.toSprite())
-        this.pos = new Vector(100, 720)
+        this.pos = new Vector(50, 720)
         this.scale = new Vector(0.3, 0.3)
         //this.anchor = new Vector(0., 0) //makkelijk afbeelding centeren
     }

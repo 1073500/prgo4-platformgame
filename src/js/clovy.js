@@ -1,5 +1,5 @@
 // alles wat je van excalibur nodig hebt moet je importeren
-import { Actor, Vector, Keys, CollisionType } from "excalibur"
+import { Actor, Vector, Keys, CollisionType, DegreeOfFreedom } from "excalibur"
 import { Resources } from './resources.js'
 import { Coin } from './coins.js'
 
@@ -15,6 +15,7 @@ export class Clovy extends Actor {
             height: Resources.Clovy.height,
             collisionType: CollisionType.Active
         })
+        this.body.bounciness = 0.1
 
         this.score = 0
         this.player = player
@@ -22,23 +23,17 @@ export class Clovy extends Actor {
         this.graphics.use(Resources.Clovy.toSprite())
         this.pos = new Vector(x, y)
         this.scale = new Vector(0.3, 0.3)
-       
+        this.body.limitDegreeOfFreedom.push(DegreeOfFreedom.Rotation)
     }
 
-    onPreUpdate(engine) {
+    onPreUpdate(engine, delta) {
         let xspeed = 0
         let yspeed = 0
         let kb = engine.input.keyboard
 
         //keys playerOne
         if (this.player === "playerOne") {
-            
-            if (kb.isHeld(Keys.W)) {
-                yspeed = -300
-            }
-            if (kb.isHeld(Keys.S)) {
-                yspeed = 300
-            }
+          
             if (kb.isHeld(Keys.A)) {
                 xspeed = -300
                 this.graphics.flipHorizontal = true       // flip de sprite
@@ -47,8 +42,12 @@ export class Clovy extends Actor {
                 xspeed = 300
                 this.graphics.flipHorizontal = false      // flip de sprite
             }
-            this.vel = new Vector(xspeed, yspeed)
+            this.vel = new Vector(xspeed, this.vel.y)
     
+        }
+
+        if (engine.input.keyboard.wasPressed(Keys.Space)) {
+            this.body.applyLinearImpulse(new Vector(0, -200 * delta))
         }
 
     }
@@ -67,6 +66,12 @@ export class Clovy extends Actor {
             console.log(`${this.score}`)
             this.scene.engine.ui.showScore(this.score)
         }
+    }
+
+    gameOver(){
+        this.score = 0
+        this.scene.engine.ui.showScore(this.score)
+        this.kill()
     }
 
 
