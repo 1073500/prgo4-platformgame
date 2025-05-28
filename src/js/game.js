@@ -12,7 +12,7 @@ import { Card } from './card.js'
 
 export class Game extends Engine {
 
-ui
+    ui
 
     constructor() {
         super({
@@ -55,7 +55,7 @@ ui
         }
 
         //platform klein
-        let platformS = new PS()
+        let platformS = new PS(/*Resources.balk-klein.toSprite()*/)
         this.add(platformS)
 
         //platform middel
@@ -67,8 +67,14 @@ ui
         this.add(platformL)
 
         //kaart in fles
-        let card = new Card()
-        this.add(card)
+        for (let i = 0; i < 2; i++) {
+            let card = new Card()
+            this.add(card)
+        }
+
+        //prickly
+        let prickly = new Actor()
+        this.add(prickly)
     }
 
 }

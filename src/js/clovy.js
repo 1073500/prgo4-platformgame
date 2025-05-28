@@ -2,12 +2,14 @@
 import { Actor, Vector, Keys, CollisionType, DegreeOfFreedom } from "excalibur"
 import { Resources } from './resources.js'
 import { Coin } from './coins.js'
+import { Card } from './card.js'
 
 // export, zodat spongebob in de game komt
 export class Clovy extends Actor {
 
     player
     score
+    cards
 
     constructor(player, x, y) {
         super({
@@ -19,6 +21,10 @@ export class Clovy extends Actor {
 
         this.score = 0
         this.player = player
+        this.cards = 0
+        /*if (this.cards === 2) {
+            console.log("Je alle kaarten!")
+        }*/
 
         this.graphics.use(Resources.Clovy.toSprite())
         this.pos = new Vector(x, y)
@@ -27,7 +33,7 @@ export class Clovy extends Actor {
 
         this.events.on("exitviewport", (e) => this.clovyLeft(e))
 
-    }
+    } 
 
     onPreUpdate(engine, delta) {
         let xspeed = 0
@@ -69,11 +75,21 @@ export class Clovy extends Actor {
             console.log(`${this.score}`)
             this.scene.engine.ui.showScore(this.score)
         }
+        if (event.other.owner instanceof Card) {
+            event.other.owner.kill()
+            this.cards++
+            console.log(`${this.cards}`)
+            this.scene.engine.ui.showCards(this.cards)
+        }
     }
+
+
 
     gameOver(){
         this.score = 0
+        this.cards = 0
         this.scene.engine.ui.showScore(this.score)
+        this.scene.engine.ui.showCards(this.score)
         this.kill()
     }
 

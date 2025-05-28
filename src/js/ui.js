@@ -3,7 +3,7 @@ import { Actor, Label, Font, FontUnit, Color, Vector } from "excalibur"
 export class UI extends Actor {
 
     scoreLabel
-    score
+    cardLabel
 
     constructor() {
         super()
@@ -18,9 +18,22 @@ export class UI extends Actor {
                 color: Color.White
             })
         })
-        this.score = 0
         this.addChild(this.scoreLabel)
         this.scoreLabel.text = `Coins: 0`
+
+
+        this.cardLabel = new Label({
+            text: 'Coins: 0',
+            pos: new Vector(100, 100),
+            font: new Font({
+                family: 'Arial',
+                size: 24,
+                unit: FontUnit.Px,
+                color: Color.White
+            })
+        })
+        this.addChild(this.cardLabel)
+        this.cardLabel.text = `Cards: 0`
 
         
     }
@@ -28,6 +41,11 @@ export class UI extends Actor {
     
     showScore(score) {
         this.scoreLabel.text = `Coins: ${score}`
+
+    }
+
+    showCards(cards) {
+        this.cardLabel.text = `Cards: ${cards}`
 
     }
 

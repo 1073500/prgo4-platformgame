@@ -3,8 +3,8 @@ import { Resources } from './resources.js'
 
 export class PS extends Actor {
     constructor() {
-        super({width: Resources.PS.width,
-            height: Resources.PS.height,
+        super({width: Resources.PM.width,
+            height: Resources.PM.height,
             collisionType: CollisionType.Fixed
         })
 
