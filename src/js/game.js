@@ -8,6 +8,7 @@ import { Coin } from './coins.js'
 import { PM } from './pm.js'
 import { Bomb } from './bomb.js'
 import { PS } from './ps.js'
+import { Card } from './card.js'
 
 export class Game extends Engine {
 
@@ -66,7 +67,7 @@ ui
         this.add(platformL)
 
         //kaart in fles
-        let card = new Actor()
+        let card = new Card()
         this.add(card)
     }
 
