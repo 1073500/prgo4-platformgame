@@ -24,6 +24,9 @@ export class Clovy extends Actor {
         this.pos = new Vector(x, y)
         this.scale = new Vector(0.3, 0.3)
         this.body.limitDegreeOfFreedom.push(DegreeOfFreedom.Rotation)
+
+        this.events.on("exitviewport", (e) => this.clovyLeft(e))
+
     }
 
     onPreUpdate(engine, delta) {
@@ -72,6 +75,13 @@ export class Clovy extends Actor {
         this.score = 0
         this.scene.engine.ui.showScore(this.score)
         this.kill()
+    }
+
+    clovyLeft(){
+       this.on("exitviewport", (event) => this.kill()) 
+       this.gameOver()
+       console.log("Clovy is uit het scherm gelopen!")
+
     }
 
 

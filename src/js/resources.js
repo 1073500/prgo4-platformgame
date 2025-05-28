@@ -8,6 +8,7 @@ const Resources = {
     PM: new ImageSource('images/balk-scaled.png'),
     PS: new ImageSource ('images/balk-klein.png'),
     Bomb: new ImageSource('images/bomb.png'),
+    Card: new ImageSource('images/kaart-in-fles.png'),
 }
 
 
