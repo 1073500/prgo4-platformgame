@@ -11,6 +11,7 @@ const Resources = {
     Bomb: new ImageSource('images/bomb.png'),
     Card: new ImageSource('images/kaart-in-fles-groot.png'),
     Lives: new ImageSource('images/live.png'),
+    Urchy: new ImageSource('images/urchy.png'),
 }
 
 

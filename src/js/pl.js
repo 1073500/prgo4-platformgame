@@ -9,7 +9,7 @@ export class PL extends Actor {
         })
 
         this.graphics.use(Resources.PL.toSprite())
-        this.pos = new Vector(700, 600)
+        this.pos = new Vector(1000, 500)
         this.scale = new Vector(0.6, 0.6)
         //this.anchor = new Vector(0., 0) //makkelijk afbeelding centeren
     }

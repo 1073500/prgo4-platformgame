@@ -11,6 +11,7 @@ import { PS } from './ps.js'
 import { Card } from './card.js'
 import { Lives } from './lives.js'
 import { PL } from './pl.js'
+import { Urchy } from './urchy.js'
 
 export class Game extends Engine {
 
@@ -86,8 +87,8 @@ export class Game extends Engine {
         }
 
         //prickly
-        let prickly = new Actor()
-        this.add(prickly)
+        let urchy = new Urchy()
+        this.add(urchy)
     }
 
 }

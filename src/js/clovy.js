@@ -110,6 +110,12 @@ export class Clovy extends Actor {
 
     }
 
+    minLives(){
+        this.lives--
+        this.scene.engine.ui.showLives(this.lives)
+    } 
+    
+
 
 
 }
