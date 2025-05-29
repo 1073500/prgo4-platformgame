@@ -8,7 +8,7 @@ export class Card extends Actor {
             })
 
         this.graphics.use(Resources.Card.toSprite())
-        this.scale = new Vector(0.08, 0.08)
+        this.scale = new Vector(0.1, 0.1)
         this.pos = new Vector (400, 200)
     }
 

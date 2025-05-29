@@ -1,5 +1,5 @@
 import '../css/style.css'
-import { Actor, Engine, Vector, DisplayMode, SolverStrategy } from "excalibur"
+import { Actor, Engine, Vector, DisplayMode, SolverStrategy, BoundingBox } from "excalibur"
 import { Resources, ResourceLoader } from './resources.js'
 import { Clovy } from './clovy.js'
 import { BG } from './bg.js'
@@ -9,6 +9,8 @@ import { PM } from './pm.js'
 import { Bomb } from './bomb.js'
 import { PS } from './ps.js'
 import { Card } from './card.js'
+import { Lives } from './lives.js'
+import { PL } from './pl.js'
 
 export class Game extends Engine {
 
@@ -30,6 +32,7 @@ export class Game extends Engine {
     }
 
     startGame() {
+        
         console.log("start de game!")
 
         //achtergrond
@@ -43,6 +46,10 @@ export class Game extends Engine {
         //clovy
         let clovy = new Clovy("playerOne", 100, 100)
         this.add(clovy)
+
+        // game vp
+        //this.currentScene.camera.strategy.lockToActor(clovy)
+        //this.currentScene.camera.strategy.limitCameraBounds(new BoundingBox(0, 0, 2000, 1200))
 
         //bomb
         let bomb = new Bomb()
@@ -63,13 +70,19 @@ export class Game extends Engine {
         this.add(platformM)
 
         //platform groot
-        let platformL = new Actor()
+        let platformL = new PL()
         this.add(platformL)
 
         //kaart in fles
         for (let i = 0; i < 2; i++) {
             let card = new Card()
             this.add(card)
+        }
+
+        //leven
+        for (let i = 0; i < 3; i++) {
+            let lives = new Lives()
+            this.add(lives)
         }
 
         //prickly

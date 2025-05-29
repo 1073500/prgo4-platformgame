@@ -4,10 +4,12 @@ export class UI extends Actor {
 
     scoreLabel
     cardLabel
+    liveLabel
 
     constructor() {
         super()
         
+        //score
         this.scoreLabel = new Label({
             text: 'Coins: 0',
             pos: new Vector(100, 50),
@@ -21,9 +23,9 @@ export class UI extends Actor {
         this.addChild(this.scoreLabel)
         this.scoreLabel.text = `Coins: 0`
 
-
+        //card
         this.cardLabel = new Label({
-            text: 'Coins: 0',
+            text: 'Card: 0',
             pos: new Vector(100, 100),
             font: new Font({
                 family: 'Arial',
@@ -34,6 +36,20 @@ export class UI extends Actor {
         })
         this.addChild(this.cardLabel)
         this.cardLabel.text = `Cards: 0`
+
+        //lives
+        this.liveLabel = new Label({
+            text: 'Lives: 0',
+            pos: new Vector(100, 150),
+            font: new Font({
+                family: 'Arial',
+                size: 24,
+                unit: FontUnit.Px,
+                color: Color.Black
+            })
+        })
+        this.addChild(this.liveLabel)
+        this.liveLabel.text = `Lives: 0`
 
         
     }
@@ -46,6 +62,11 @@ export class UI extends Actor {
 
     showCards(cards) {
         this.cardLabel.text = `Cards: ${cards}`
+
+    }
+
+    showLives(lives) {
+        this.liveLabel.text = `Lives: ${lives}`
 
     }
 

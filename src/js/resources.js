@@ -7,8 +7,10 @@ const Resources = {
     Coin: new ImageSource('images/coin.png'),
     PM: new ImageSource('images/balk-scaled.png'),
     PS: new ImageSource ('images/balk-klein.png'),
+    PL: new ImageSource('images/balk-groot.png'),
     Bomb: new ImageSource('images/bomb.png'),
     Card: new ImageSource('images/kaart-in-fles-groot.png'),
+    Lives: new ImageSource('images/live.png'),
 }
 
 

@@ -3,6 +3,8 @@ import { Actor, Vector, Keys, CollisionType, DegreeOfFreedom } from "excalibur"
 import { Resources } from './resources.js'
 import { Coin } from './coins.js'
 import { Card } from './card.js'
+import { Lives } from './lives.js'
+
 
 // export, zodat spongebob in de game komt
 export class Clovy extends Actor {
@@ -10,6 +12,7 @@ export class Clovy extends Actor {
     player
     score
     cards
+    lives
 
     constructor(player, x, y) {
         super({
@@ -22,9 +25,9 @@ export class Clovy extends Actor {
         this.score = 0
         this.player = player
         this.cards = 0
-        /*if (this.cards === 2) {
-            console.log("Je alle kaarten!")
-        }*/
+        this.lives = 3
+
+        console.log(`clovy heeft: ${this.lives} levens`)
 
         this.graphics.use(Resources.Clovy.toSprite())
         this.pos = new Vector(x, y)
@@ -34,7 +37,8 @@ export class Clovy extends Actor {
         this.events.on("exitviewport", (e) => this.clovyLeft(e))
 
     } 
-
+    //onPreUpdate is een functie die elke frame wordt aangeroepen
+    // hier kan je dingen doen voordat de game wordt getekend
     onPreUpdate(engine, delta) {
         let xspeed = 0
         let yspeed = 0
@@ -61,9 +65,13 @@ export class Clovy extends Actor {
 
     }
 
-    //coins verzamelen
+    // onInitialize
+    // hier kan je dingen doen voordat de game begint
+    //items verzamelen
     onInitialize(engine) {
         this.on('collisionstart', (event) => this.hitSomething(event))
+        this.scene.engine.ui.showLives(this.lives)
+        
     }
 
 
@@ -84,19 +92,21 @@ export class Clovy extends Actor {
     }
 
 
-
     gameOver(){
         this.score = 0
         this.cards = 0
+        this.lives = 0
+        console.log(`Clovy heeft ${this.lives} levens over!`)
         this.scene.engine.ui.showScore(this.score)
-        this.scene.engine.ui.showCards(this.score)
+        this.scene.engine.ui.showCards(this.cards)
+        this.scene.engine.ui.showLives(this.lives)
         this.kill()
     }
 
     clovyLeft(){
        this.on("exitviewport", (event) => this.kill()) 
        this.gameOver()
-       console.log("Clovy is uit het scherm gelopen!")
+       console.log("Clovy is uit het scherm gevallen!")
 
     }
 
