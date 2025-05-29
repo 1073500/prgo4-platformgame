@@ -14,7 +14,7 @@ export class Urchy extends Actor {
 
         this.graphics.use(Resources.Urchy.toSprite())
         this.pos = new Vector(600, 100)
-        this.scale = new Vector(0.30, 0.30)
+        this.scale = new Vector(0.15, 0.15)
         this.direction = 1
 
     }
