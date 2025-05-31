@@ -27,7 +27,7 @@ export class Clovy extends Actor {
         this.player = player
         this.cards = 0
         this.lives = 3
-        this.highScore = Number(localStorage.getItem("highScore")) || 0;
+        this.highScore = Number(localStorage.getItem("highScore")) || 0
 
 
         console.log(`clovy heeft: ${this.lives} levens`)
@@ -104,7 +104,7 @@ export class Clovy extends Actor {
             console.log(`${this.cards}`)
             this.scene.engine.ui.showCards(this.cards)
             if (this.cards === 5) {
-                console.log("Je hebt alle kaarten verzameld!");
+                console.log("Je hebt alle kaarten verzameld!")
             }
         }
     }

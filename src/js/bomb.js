@@ -42,11 +42,24 @@ export class Bomb extends Actor {
 
     hitClovy(event) {
         if (event.other.owner instanceof Clovy) {
-           // event.other.owner.kill()
-           event.other.owner.gameOver()
-            console.log("De bom heeft Clovy geraakt :(")
+            const clovy = event.other.owner
+    
+            const clovyBottom = clovy.pos.y + clovy.height / 2
+            const bombTop = this.pos.y - this.height / 2
+
+            if (clovyBottom <= bombTop + 10) {
+                console.log("Clovy springt op de Bomb!")
+                this.kill() // Bomb gaat dood
+
+                //bouncy
+                clovy.body.applyLinearImpulse(new Vector(0, -400)) 
+            } else {
+                clovy.gameOver() // Clovy gaat dood
+                console.log("De bom heeft Clovy geraakt :(")
+            }
         }
     }
+    
 
 
 }
