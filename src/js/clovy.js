@@ -13,6 +13,7 @@ export class Clovy extends Actor {
     score
     cards
     lives
+    highScore
 
     constructor(player, x, y) {
         super({
@@ -26,6 +27,8 @@ export class Clovy extends Actor {
         this.player = player
         this.cards = 0
         this.lives = 3
+        this.highScore = Number(localStorage.getItem("highScore")) || 0;
+
 
         console.log(`clovy heeft: ${this.lives} levens`)
 
@@ -36,7 +39,7 @@ export class Clovy extends Actor {
 
         this.events.on("exitviewport", (e) => this.clovyLeft(e))
 
-    } 
+    }
     //onPreUpdate is een functie die elke frame wordt aangeroepen
     // hier kan je dingen doen voordat de game wordt getekend
     onPreUpdate(engine, delta) {
@@ -46,7 +49,7 @@ export class Clovy extends Actor {
 
         //keys playerOne
         if (this.player === "playerOne") {
-          
+
             if (kb.isHeld(Keys.A)) {
                 xspeed = -300
                 this.graphics.flipHorizontal = true       // flip de sprite
@@ -56,7 +59,7 @@ export class Clovy extends Actor {
                 this.graphics.flipHorizontal = false      // flip de sprite
             }
             this.vel = new Vector(xspeed, this.vel.y)
-    
+
         }
 
         if (engine.input.keyboard.wasPressed(Keys.Space)) {
@@ -70,8 +73,14 @@ export class Clovy extends Actor {
     //items verzamelen
     onInitialize(engine) {
         this.on('collisionstart', (event) => this.hitSomething(event))
+
         this.scene.engine.ui.showLives(this.lives)
-        
+
+        // ophalen uit ls
+        let savedHighScore = Number(localStorage.getItem("highScore")) || 0
+        this.highScore = savedHighScore
+        this.scene.engine.ui.showHighScore(this.highScore)
+
     }
 
 
@@ -82,17 +91,26 @@ export class Clovy extends Actor {
             this.score++
             console.log(`${this.score}`)
             this.scene.engine.ui.showScore(this.score)
+
+            if (this.score > this.highScore) {
+                this.highScore = this.score
+                localStorage.setItem("highScore", this.highScore)
+                this.scene.engine.ui.showHighScore(this.highScore)
+            }
         }
         if (event.other.owner instanceof Card) {
             event.other.owner.kill()
             this.cards++
             console.log(`${this.cards}`)
             this.scene.engine.ui.showCards(this.cards)
+            if (this.cards === 5) {
+                console.log("Je hebt alle kaarten verzameld!");
+            }
         }
     }
 
 
-    gameOver(){
+    gameOver() {
         this.score = 0
         this.cards = 0
         this.lives = 0
@@ -100,21 +118,27 @@ export class Clovy extends Actor {
         this.scene.engine.ui.showScore(this.score)
         this.scene.engine.ui.showCards(this.cards)
         this.scene.engine.ui.showLives(this.lives)
+        this.scene.engine.ui.showHighScore(this.highScore)
         this.kill()
+        console.log(`Highscore is ${this.highScore}`)
     }
 
-    clovyLeft(){
-       this.on("exitviewport", (event) => this.kill()) 
-       this.gameOver()
-       console.log("Clovy is uit het scherm gevallen!")
+    clovyLeft() {
+        this.on("exitviewport", (event) => this.kill())
+        this.gameOver()
+        console.log("Clovy is uit het scherm gevallen!")
 
     }
 
-    minLives(){
+    minLives() {
         this.lives--
         this.scene.engine.ui.showLives(this.lives)
-    } 
-    
+        if (this.lives < 1) {
+            console.log("Clovy heeft geen levens meer!");
+            this.kill()
+        }
+    }
+
 
 
 
