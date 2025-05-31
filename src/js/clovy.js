@@ -1,5 +1,5 @@
 // alles wat je van excalibur nodig hebt moet je importeren
-import { Actor, Vector, Keys, CollisionType, DegreeOfFreedom } from "excalibur"
+import { Actor, Vector, Keys, CollisionType, DegreeOfFreedom, SpriteSheet, range, Animation } from "excalibur"
 import { Resources } from './resources.js'
 import { Coin } from './coins.js'
 import { Card } from './card.js'
@@ -21,6 +21,7 @@ export class Clovy extends Actor {
             height: Resources.Clovy.height,
             collisionType: CollisionType.Active
         })
+
         this.body.bounciness = 0.1
 
         this.score = 0
