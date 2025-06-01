@@ -1,5 +1,5 @@
 // alles wat je van excalibur nodig hebt moet je importeren
-import { Actor, Vector, Keys, CollisionType, DegreeOfFreedom, SpriteSheet, range, Animation } from "excalibur"
+import { Actor, Vector, Keys, CollisionType, DegreeOfFreedom, SpriteSheet, Animation, range} from "excalibur"
 import { Resources } from './resources.js'
 import { Coin } from './coins.js'
 import { Card } from './card.js'
@@ -22,6 +22,22 @@ export class Clovy extends Actor {
             collisionType: CollisionType.Active
         })
 
+        //animation
+        const runSheet = SpriteSheet.fromImageSource({
+            image: Resources.Clovy,
+            grid: { rows: 1, columns: 3, spriteWidth: 158, spriteHeight: 290 }
+        })
+        const idle = runSheet.sprites[0] // geen animatie
+        const runLeft = Animation.fromSpriteSheet(runSheet, range(1, 2), 1000) // animatie van links naar rechts
+        const runRight = Animation.fromSpriteSheet(runSheet, range(1, 2), 1000) // animatie van rechts naar links
+
+        this.graphics.add("idle", idle)
+        this.graphics.add("runleft", runLeft) //a
+        this.graphics.add("runright", runRight) //d
+
+        this.graphics.use(idle)
+
+
         this.body.bounciness = 0.1
 
         this.score = 0
@@ -35,7 +51,7 @@ export class Clovy extends Actor {
 
         this.graphics.use(Resources.Clovy.toSprite())
         this.pos = new Vector(x, y)
-        this.scale = new Vector(0.3, 0.3)
+        this.scale = new Vector(0.5, 0.5)
         this.body.limitDegreeOfFreedom.push(DegreeOfFreedom.Rotation)
 
         this.events.on("exitviewport", (e) => this.clovyLeft(e))
@@ -47,6 +63,8 @@ export class Clovy extends Actor {
         let xspeed = 0
         let yspeed = 0
         let kb = engine.input.keyboard
+        this.graphics.use('idle')
+
 
         //keys playerOne
         if (this.player === "playerOne") {
@@ -54,10 +72,12 @@ export class Clovy extends Actor {
             if (kb.isHeld(Keys.A)) {
                 xspeed = -300
                 this.graphics.flipHorizontal = true       // flip de sprite
+                this.graphics.use('runleft') // animatie van links naar rechts
             }
             if (kb.isHeld(Keys.D)) {
                 xspeed = 300
                 this.graphics.flipHorizontal = false      // flip de sprite
+                this.graphics.use('runright') // animatie van rechts naar links
             }
             this.vel = new Vector(xspeed, this.vel.y)
 
