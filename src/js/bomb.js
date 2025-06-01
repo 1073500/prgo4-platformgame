@@ -3,7 +3,10 @@ import { Resources } from './resources.js'
 import { Clovy } from "./clovy.js"
 
 export class Bomb extends Actor {
-    constructor() {
+
+    enemy
+
+    constructor(enemy) {
         super({
             width: Resources.Bomb.width,
             height: Resources.Bomb.height,
@@ -11,7 +14,7 @@ export class Bomb extends Actor {
         })
 
 
-
+        this.enemy = enemy
         this.graphics.use(Resources.Bomb.toSprite())
         this.pos = new Vector(1280 / 2, 400)
         this.scale = new Vector(0.30, 0.30)

@@ -1,11 +1,10 @@
-// alles wat je van excalibur nodig hebt moet je importeren
-import { Actor, Vector, Keys, CollisionType, DegreeOfFreedom, SpriteSheet, Animation, range, Shape, CompositeCollider} from "excalibur"
+
+import { Actor, Vector, Keys, CollisionType, DegreeOfFreedom, SpriteSheet, Animation, range, Shape, CompositeCollider } from "excalibur"
 import { Resources } from './resources.js'
 import { Coin } from './coins.js'
 import { Card } from './card.js'
 
 
-// export, zodat spongebob in de game komt
 export class Clovy extends Actor {
 
     player
@@ -20,7 +19,6 @@ export class Clovy extends Actor {
             height: Resources.Clovy.height,
             collisionType: CollisionType.Active
         })
-        //this.z = 1000
 
         //animation
         const runSheet = SpriteSheet.fromImageSource({
@@ -57,8 +55,7 @@ export class Clovy extends Actor {
         this.events.on("exitviewport", (e) => this.clovyLeft(e))
 
     }
-    //onPreUpdate is een functie die elke frame wordt aangeroepen
-    // hier kan je dingen doen voordat de game wordt getekend
+
     onPreUpdate(engine, delta) {
         let xspeed = 0
         let yspeed = 0
@@ -89,18 +86,15 @@ export class Clovy extends Actor {
 
     }
 
-    // onInitialize
-    // hier kan je dingen doen voordat de game begint
-    //items verzamelen
     onInitialize(engine) {
         //hitbox
         let capsule = new CompositeCollider([
-                Shape.Circle(70, new Vector(0, 80)),
-                Shape.Circle(100, new Vector(0, -50))
-            ])
+            Shape.Circle(70, new Vector(0, 80)),
+            Shape.Circle(100, new Vector(0, -50))
+        ])
         this.collider.set(capsule)
         this.body.collisionType = CollisionType.Active
-        
+
         this.on('collisionstart', (event) => this.hitSomething(event))
 
         this.scene.engine.ui.showLives(this.lives)
@@ -115,7 +109,6 @@ export class Clovy extends Actor {
 
     hitSomething(event) {
         if (event.other.owner instanceof Coin) {
-            // Je kan `instanceof` gebruiken om te zien waar je tegenaan botst.
             event.other.owner.kill()
             this.score++
             console.log(`${this.score}`)

@@ -3,13 +3,17 @@ import { Resources } from './resources.js'
 import { Clovy } from "./clovy.js"
 
 export class Urchy extends Actor {
-    constructor() {
+
+
+    enemy
+    constructor(enemy) {
         super({
             width: Resources.Urchy.width,
             height: Resources.Urchy.height,
             collisionType: CollisionType.Active
         })
 
+        this.enemy = enemy
 
         this.body.bounciness = 1
         this.graphics.use(Resources.Urchy.toSprite())

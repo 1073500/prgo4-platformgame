@@ -52,7 +52,7 @@ export class Game extends Engine {
         this.currentScene.camera.strategy.limitCameraBounds(new BoundingBox(0, 0, 2000, 1200))
 
         //bomb
-        let bomb = new Bomb()
+        let bomb = new Bomb("Bomb")
         this.add(bomb)
 
         //coins
@@ -62,7 +62,7 @@ export class Game extends Engine {
         }
 
         //platform klein
-        let platformS = new PS(/*Resources.balk-klein.toSprite()*/)
+        let platformS = new PS
         this.add(platformS)
 
         //platform middel
@@ -83,7 +83,7 @@ export class Game extends Engine {
 
         //urchy
         for (let i = 0; i < 8; i++) {
-            let urchy = new Urchy()
+            let urchy = new Urchy("Urchy")
             this.add(urchy)
         }
     }
