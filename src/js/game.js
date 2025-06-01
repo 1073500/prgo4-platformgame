@@ -9,7 +9,6 @@ import { PM } from './pm.js'
 import { Bomb } from './bomb.js'
 import { PS } from './ps.js'
 import { Card } from './card.js'
-import { Lives } from './lives.js'
 import { PL } from './pl.js'
 import { Urchy } from './urchy.js'
 
@@ -33,7 +32,7 @@ export class Game extends Engine {
     }
 
     startGame() {
-        
+
         console.log("start de game!")
 
         //achtergrond
@@ -49,15 +48,15 @@ export class Game extends Engine {
         this.add(clovy)
 
         // game vp
-        //this.currentScene.camera.strategy.lockToActor(clovy)
-        //this.currentScene.camera.strategy.limitCameraBounds(new BoundingBox(0, 0, 2000, 1200))
+        this.currentScene.camera.strategy.lockToActor(clovy)
+        this.currentScene.camera.strategy.limitCameraBounds(new BoundingBox(0, 0, 2000, 1200))
 
         //bomb
         let bomb = new Bomb()
         this.add(bomb)
 
         //coins
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 20; i++) {
             let coin = new Coin()
             this.add(coin)
         }
@@ -67,28 +66,26 @@ export class Game extends Engine {
         this.add(platformS)
 
         //platform middel
-        let platformM = new PM()
-        this.add(platformM)
+        for (let i = 0; i < 3; i++) {
+            let platformM = new PM()
+            this.add(platformM)
+        }
 
         //platform groot
         let platformL = new PL()
         this.add(platformL)
 
         //kaart in fles
-        for (let i = 0; i < 2; i++) {
+        for (let i = 0; i < 5; i++) {
             let card = new Card()
             this.add(card)
         }
 
-        //leven
-        for (let i = 0; i < 3; i++) {
-            let lives = new Lives()
-            this.add(lives)
+        //urchy
+        for (let i = 0; i < 8; i++) {
+            let urchy = new Urchy()
+            this.add(urchy)
         }
-
-        //prickly
-        let urchy = new Urchy()
-        this.add(urchy)
     }
 
 }

@@ -21,7 +21,7 @@ export class Bomb extends Actor {
 
     }
     onPostUpdate(engine) {
-        if(this.direction === 1 && this.pos.x > 1200) {
+        if(this.direction === 1 && this.pos.x > 1900) {
             this.direction = -1
             this.vel = new Vector(120 * this.direction, 0)
 

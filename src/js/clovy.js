@@ -1,9 +1,8 @@
 // alles wat je van excalibur nodig hebt moet je importeren
-import { Actor, Vector, Keys, CollisionType, DegreeOfFreedom, SpriteSheet, Animation, range} from "excalibur"
+import { Actor, Vector, Keys, CollisionType, DegreeOfFreedom, SpriteSheet, Animation, range, Shape, CompositeCollider} from "excalibur"
 import { Resources } from './resources.js'
 import { Coin } from './coins.js'
 import { Card } from './card.js'
-import { Lives } from './lives.js'
 
 
 // export, zodat spongebob in de game komt
@@ -21,6 +20,7 @@ export class Clovy extends Actor {
             height: Resources.Clovy.height,
             collisionType: CollisionType.Active
         })
+        //this.z = 1000
 
         //animation
         const runSheet = SpriteSheet.fromImageSource({
@@ -93,6 +93,14 @@ export class Clovy extends Actor {
     // hier kan je dingen doen voordat de game begint
     //items verzamelen
     onInitialize(engine) {
+        //hitbox
+        let capsule = new CompositeCollider([
+                Shape.Circle(70, new Vector(0, 80)),
+                Shape.Circle(100, new Vector(0, -50))
+            ])
+        this.collider.set(capsule)
+        this.body.collisionType = CollisionType.Active
+        
         this.on('collisionstart', (event) => this.hitSomething(event))
 
         this.scene.engine.ui.showLives(this.lives)

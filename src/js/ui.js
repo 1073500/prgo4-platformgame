@@ -1,6 +1,6 @@
-import { Actor, Label, Font, FontUnit, Color, Vector } from "excalibur"
+import { Actor, Label, Font, FontUnit, Color, Vector, ScreenElement } from "excalibur"
 
-export class UI extends Actor {
+export class UI extends ScreenElement {
 
     scoreLabel
     cardLabel
@@ -9,6 +9,7 @@ export class UI extends Actor {
 
     constructor() {
         super()
+        this.z = 1000
         
         //score
         this.scoreLabel = new Label({

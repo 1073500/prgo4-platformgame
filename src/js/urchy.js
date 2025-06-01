@@ -7,13 +7,13 @@ export class Urchy extends Actor {
         super({
             width: Resources.Urchy.width,
             height: Resources.Urchy.height,
-            collisionType: CollisionType.Fixed
+            collisionType: CollisionType.Active
         })
 
 
-
+        this.body.bounciness = 1
         this.graphics.use(Resources.Urchy.toSprite())
-        this.pos = new Vector(600, 100)
+        this.pos.x = Math.random() * (1200 - this.width) + this.width / 2
         this.scale = new Vector(0.15, 0.15)
         this.direction = 1
 
